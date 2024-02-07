@@ -1,5 +1,73 @@
 spring:
-  profiles:
-    active: local
-  config:
-    import: secret/
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  h2.console:
+    enabled: true
+    path: /h2-console
+  datasource:
+    url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    hikari:
+      maximum-pool-size: 5
+      connectionTimeout: 3000
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        default_batch_fetch_size: 10
+        format_sql: true
+      show_sql: true
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    open-in-view: false
+
+security:
+  oauth2:
+    client-id: a6d76fa06e3f764360e4
+    client-secret: 1ad68945daa991455c2d893c23f832f6c8aacf0f
+
+  jwt:
+    access:
+      secret-key: 05b87ded4f471df23ce1c804b9a9b4180d5a4cf46c7e94752cb6dfdf8a7370952fdad2f84e1cd2c18b128e209153eec3ef868e583d5452f50ddafb199fe09f4f
+      expire-length: 1800000
+
+github:
+  url:
+    base: https://github.com
+    profile: https://api.github.com/user
+    redirect: https://gongseek.site/callback
+
+cors:
+  url:
+    service: empty
+    local: http://localhost:3000
+
+server:
+  compression:
+    enabled: true
+    min-response-size: 10
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+
+application:
+  bucket:
+    name: gongseek-image
+  cloudfront:
+    url: https://dknikgq2g8qtc.cloudfront.net/
+
+
